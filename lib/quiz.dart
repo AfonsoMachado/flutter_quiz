@@ -5,7 +5,7 @@ import 'package:flutter_quiz/question.dart';
 class Quiz extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int selectedQuestion;
-  final void Function() onAnswered;
+  final void Function(int) onAnswered;
 
   const Quiz({
     super.key,
@@ -24,9 +24,12 @@ class Quiz extends StatelessWidget {
         ? questions[selectedQuestion].cast()['answers']
         : [];
     // Criando uma lista de widgets para enviar para o componente filho
-    List<Answer> widgets = answers
-        .map((ans) => Answer(ans['text'].toString(), onAnswered))
-        .toList();
+    List<Answer> widgets = (answers.map((ans) {
+      return Answer(
+        ans['text'].toString(),
+        () => onAnswered(int.parse(ans['score'].toString())),
+      );
+    }).toList());
 
     return Column(
       children: <Widget>[

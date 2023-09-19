@@ -8,6 +8,7 @@ main() {
 
 class _QuestionAppState extends State<QuestionApp> {
   var _selectedQuestion = 0;
+  var _totalScore = 0;
   final _questions = const [
     {
       'text': 'Qual é o seu Jedi favorito?',
@@ -38,10 +39,11 @@ class _QuestionAppState extends State<QuestionApp> {
     }
   ];
 
-  void _answer() {
+  void _answer(int score) {
     if (hasSelectedQuestion) {
       setState(() {
         _selectedQuestion++;
+        _totalScore += score;
       });
     }
   }
@@ -63,7 +65,7 @@ class _QuestionAppState extends State<QuestionApp> {
                 questions: _questions,
                 onAnswered: _answer,
                 selectedQuestion: _selectedQuestion)
-            : const Result(),
+            : Result(_totalScore),
       ),
     );
   }
