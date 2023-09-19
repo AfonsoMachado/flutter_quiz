@@ -20,12 +20,13 @@ class Quiz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> answers = hasSelectedQuestion
+    List<Map<String, Object>> answers = hasSelectedQuestion
         ? questions[selectedQuestion].cast()['answers']
         : [];
     // Criando uma lista de widgets para enviar para o componente filho
-    List<Answer> widgets =
-        answers.map((text) => Answer(text, onAnswered)).toList();
+    List<Answer> widgets = answers
+        .map((ans) => Answer(ans['text'].toString(), onAnswered))
+        .toList();
 
     return Column(
       children: <Widget>[

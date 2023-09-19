@@ -12,23 +12,28 @@ class _QuestionAppState extends State<QuestionApp> {
     {
       'text': 'Qual é o seu Jedi favorito?',
       'answers': [
-        'Luke Skywalker',
-        'Obi-wan Kenobi',
-        'Ahsoka Tano',
-        'Mestre Yoda'
+        {'text': 'Luke Skywalker', 'score': 1},
+        {'text': 'Obi-wan Kenobi', 'score': 3},
+        {'text': 'Ahsoka Tano', 'score': 10},
+        {'text': 'Mestre Yoda', 'score': 5},
       ]
     },
     {
       'text': 'Qual é o seu Sith favorito',
-      'answers': ['Darh Vader', 'Darth Maul', 'Darth Sidious', 'Darth Tyranus'],
+      'answers': [
+        {'text': 'Darh Vader', 'score': 10},
+        {'text': 'Darth Maul', 'score': 3},
+        {'text': 'Darth Sidious', 'score': 5},
+        {'text': 'Darth Tyranus', 'score': 1}
+      ],
     },
     {
       'text': 'Qual o melhor filme de Star Wars?',
       'answers': [
-        'O Império Contra-Ataca',
-        'A Vingança dos Sith',
-        'O Despertar da Força',
-        'A Ameaça Fantasma'
+        {'text': 'O Império Contra-Ataca', 'score': 10},
+        {'text': 'A Vingança dos Sith', 'score': 5},
+        {'text': 'O Despertar da Força', 'score': 3},
+        {'text': 'A Ameaça Fantasma', 'score': 1}
       ]
     }
   ];
