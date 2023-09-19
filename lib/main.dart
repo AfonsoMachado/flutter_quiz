@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/answer.dart';
-import 'package:flutter_quiz/question.dart';
+import 'package:flutter_quiz/quiz.dart';
 import 'package:flutter_quiz/result.dart';
 
 main() {
@@ -48,13 +47,6 @@ class _QuestionAppState extends State<QuestionApp> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> answers = hasSelectedQuestion
-        ? _questions[_selectedQuestion].cast()['answers']
-        : [];
-    // Criando uma lista de widgets para enviar para o componente filho
-    List<Answer> widgets =
-        answers.map((text) => Answer(text, _answer)).toList();
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -62,13 +54,10 @@ class _QuestionAppState extends State<QuestionApp> {
           centerTitle: true,
         ),
         body: hasSelectedQuestion
-            ? Column(
-                children: <Widget>[
-                  Question(_questions[_selectedQuestion]['text'].toString()),
-                  ...widgets
-                  //Pega todas as respostas das passando o widger como parêmetro
-                ],
-              )
+            ? Quiz(
+                questions: _questions,
+                onAnswered: _answer,
+                selectedQuestion: _selectedQuestion)
             : const Result(),
       ),
     );
