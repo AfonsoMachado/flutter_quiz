@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_quiz/answers.dart';
+import 'package:flutter_quiz/answer.dart';
 import 'package:flutter_quiz/question.dart';
 
 main() {
@@ -13,7 +13,6 @@ class _QuestionAppState extends State<QuestionApp> {
     setState(() {
       _selectedQuestion++;
     });
-    print(_selectedQuestion);
   }
 
   @override
@@ -31,12 +30,9 @@ class _QuestionAppState extends State<QuestionApp> {
         body: Column(
           children: <Widget>[
             Question(questions[_selectedQuestion]),
-            ElevatedButton(
-                onPressed: _answer, child: const Answers('Resposta 1')),
-            ElevatedButton(
-                onPressed: _answer, child: const Answers('Resposta 2')),
-            ElevatedButton(
-                onPressed: _answer, child: const Answers('Resposta 3'))
+            Answer('Resposta 1', _answer),
+            Answer('Resposta 2', _answer),
+            Answer('Resposta 3', _answer),
           ],
         ),
       ),
