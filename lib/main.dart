@@ -8,33 +8,67 @@ main() {
 
 class _QuestionAppState extends State<QuestionApp> {
   var _selectedQuestion = 0;
+  final _questions = const [
+    {
+      'text': 'Qual é o seu Jedi favorito?',
+      'answers': [
+        'Luke Skywalker',
+        'Obi-wan Kenobi',
+        'Ahsoka Tano',
+        'Mestre Yoda'
+      ]
+    },
+    {
+      'text': 'Qual é o seu Sith favorito',
+      'answers': ['Darh Vader', 'Darth Maul', 'Darth Sidious', 'Darth Tyranus'],
+    },
+    {
+      'text': 'Qual o melhor filme de Star Wars?',
+      'answers': [
+        'O Império Contra-Ataca',
+        'A Vingança dos Sith',
+        'O Despertar da Força',
+        'A Ameaça Fantasma'
+      ]
+    }
+  ];
 
   void _answer() {
-    setState(() {
-      _selectedQuestion++;
-    });
+    if (hasSelectedQuestion) {
+      setState(() {
+        _selectedQuestion++;
+      });
+    }
+  }
+
+  bool get hasSelectedQuestion {
+    return _selectedQuestion < _questions.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    final questions = [
-      'Qual é a sua cor favorita?',
-      'Qual é o seu animal favorito'
-    ];
+    List<String> answers = hasSelectedQuestion
+        ? _questions[_selectedQuestion].cast()['answers']
+        : [];
+    // Criando uma lista de widgets para enviar para o componente filho
+    List<Answer> widgets =
+        answers.map((text) => Answer(text, _answer)).toList();
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Perguntas'),
+          title: const Text('Quiz de Star Wars'),
+          centerTitle: true,
         ),
-        body: Column(
-          children: <Widget>[
-            Question(questions[_selectedQuestion]),
-            Answer('Resposta 1', _answer),
-            Answer('Resposta 2', _answer),
-            Answer('Resposta 3', _answer),
-          ],
-        ),
+        body: hasSelectedQuestion
+            ? Column(
+                children: <Widget>[
+                  Question(_questions[_selectedQuestion]['text'].toString()),
+                  ...widgets
+                  //Pega todas as respostas das passando o widger como parêmetro
+                ],
+              )
+            : null,
       ),
     );
   }
