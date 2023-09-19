@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz/answer.dart';
 import 'package:flutter_quiz/question.dart';
+import 'package:flutter_quiz/result.dart';
 
 main() {
   runApp(const QuestionApp());
@@ -68,7 +69,7 @@ class _QuestionAppState extends State<QuestionApp> {
                   //Pega todas as respostas das passando o widger como parêmetro
                 ],
               )
-            : null,
+            : const Result(),
       ),
     );
   }
