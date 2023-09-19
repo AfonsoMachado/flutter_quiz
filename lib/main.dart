@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/answers.dart';
+import 'package:flutter_quiz/question.dart';
 
 main() {
-  runApp(QuestionApp());
+  runApp(const QuestionApp());
 }
 
-class QuestionAppState extends State<QuestionApp> {
-  var selectedQuestion = 0;
+class _QuestionAppState extends State<QuestionApp> {
+  var _selectedQuestion = 0;
 
-  void answer() {
-    selectedQuestion++;
-    print(selectedQuestion);
+  void _answer() {
+    setState(() {
+      _selectedQuestion++;
+    });
+    print(_selectedQuestion);
   }
 
   @override
@@ -26,10 +30,13 @@ class QuestionAppState extends State<QuestionApp> {
         ),
         body: Column(
           children: <Widget>[
-            Text(questions[selectedQuestion]),
-            ElevatedButton(onPressed: answer, child: Text('Resposta 1')),
-            ElevatedButton(onPressed: answer, child: Text('Resposta 2')),
-            ElevatedButton(onPressed: answer, child: Text('Resposta 3'))
+            Question(questions[_selectedQuestion]),
+            ElevatedButton(
+                onPressed: _answer, child: const Answers('Resposta 1')),
+            ElevatedButton(
+                onPressed: _answer, child: const Answers('Resposta 2')),
+            ElevatedButton(
+                onPressed: _answer, child: const Answers('Resposta 3'))
           ],
         ),
       ),
@@ -38,8 +45,10 @@ class QuestionAppState extends State<QuestionApp> {
 }
 
 class QuestionApp extends StatefulWidget {
+  const QuestionApp({super.key});
+
   @override
   State<QuestionApp> createState() {
-    return QuestionAppState();
+    return _QuestionAppState();
   }
 }
